@@ -7,115 +7,38 @@ if empty(glob('~/.config/vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin(expand('~/.config/vim/plugged'))
+"}}}
+
+" ============= Plugins =============== "{{{
+
+source ~/.vim/plugins.vim
 
 "}}}
 
-" ================= looks and GUI stuff ================== "{{{
-
-Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-Plug 'luochen1990/rainbow'                              " rainbow parenthesis
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'gregsexton/MatchTag'                              " highlight matching html tags
-Plug 'Jorengarenar/vim-MvVis'                           " move visual selection
+" ============= Options =============== "{{{
+source ~/.vim/options.vim
 "}}}
-
-" ================= Functionalities ================= "{{{
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
-Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
-Plug 'voldikss/vim-floaterm'
-" Plug 'honza/vim-snippets'                               " actual snippets
-Plug 'Yggdroot/indentLine'                              " show indentation lines
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
-Plug 'tpope/vim-commentary'                             " better commenting
-Plug 'tpope/vim-fugitive'                               " git support
-Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
-" Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
-Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-" Plug 'machakann/vim-sandwich'                           " make sandwiches
-" Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-" Plug 'memgraph/cypher.vim'
-call plug#end()
-
-"}}}
-
-" ==================== general config ======================== "{{{
-
-set termguicolors                                       " Opaque Background
-set mouse=a                                             " enable mouse scrolling
-set clipboard+=unnamedplus                              " use system clipboard by default
-set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
-set expandtab smarttab                                  " tab key actions
-set incsearch ignorecase smartcase hlsearch             " highlight text while searching
-set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
-set fillchars+=vert:\▏                                  " requires a patched nerd font (try FiraCode)
-set wrap breakindent                                    " wrap long lines to the width set by tw
-set encoding=utf-8                                      " text encoding
-set number                                              " enable numbers on the left
-set relativenumber                                      " current line is 0
-set title                                               " tab title as file name
-set noshowmode                                          " dont show current mode below statusline
-set noshowcmd                                           " to get rid of display of last command
-set conceallevel=2                                      " set this so we wont break indentation plugin
-set splitright                                          " open vertical split to the right
-set splitbelow                                          " open horizontal split to the bottom
-set tw=90                                               " auto wrap lines that are longer than that
-set emoji                                               " enable emojis
-set history=1000                                        " history limit
-set backspace=indent,eol,start                          " sensible backspacing
-set undofile                                            " enable persistent undo
-set undodir=/tmp                                        " undo temp file directory
-set foldlevel=0                                         " open all folds by default
-" set inccommand=nosplit                                  " visual feedback while substituting
-set showtabline=0                                       " always show tabline
-set grepprg=rg\ --vimgrep                               " use rg as default grepper
-
-" performance tweaks
-set nocursorline
-set nocursorcolumn
-set scrolljump=5
-set lazyredraw
-set redrawtime=10000
-set synmaxcol=180
-set re=1
-
-" required by coc
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
 
 " Themeing
 " let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 colorscheme catppuccin_mocha
-hi Pmenu guibg='#1e1e2e' guifg=white                    " popup menu colors
-hi Comment gui=italic cterm=italic                      " italic comments
-hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE          " search string highlight color
-hi NonText guifg=bg                                     " mask ~ on empty lines
-hi clear CursorLineNr                                   " use the theme color for relative number
-hi CursorLineNr gui=bold                                " make relative number bold
-hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
-
-" colors for git (especially the gutter)
-hi DiffAdd  guibg=#24273a guifg=#43a047
-hi DiffChange guibg=#24273a guifg=#fdd835
-hi DiffRemoved guibg=#24273a guifg=#e53935
+ " hi Pmenu guibg='#1e1e2e' guifg=white                    " popup menu colors
+" hi Comment gui=italic cterm=italic                      " italic comments
+ " hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE          " search string highlight color
+" hi NonText guifg=bg                                     " mask ~ on empty lines
+" hi clear CursorLineNr                                   " use the theme color for relative number
+" hi CursorLineNr gui=bold                                " make relative number bold
+" hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
 
 " coc multi cursor highlight color
-hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
+" hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 
 "}}}
 
 " " ======================== Plugin Configurations ======================== "{{{
 "
  "" built in plugins
- let loaded_netrwPlugin = 1                              " disable netrw
+ let loaded_netrwPlugin = 0                              " disable netrw
  let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
  let g:loaded_python_provider = 0
  let g:loaded_perl_provider = 1
@@ -154,27 +77,32 @@ hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
              \'coc-sh',
              \]
 
- " indentLine
- let g:indentLine_char_list = ['▏', '¦', '┆', '┊']
- let g:indentLine_setColors = 0
- let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
+ " " indentLine
+ " let g:indentLine_char_list = ['▏', '¦', '┆', '┊']
+ " let g:indentLine_setColors = 0
+ " let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 
  " rainbow brackets
- let g:rainbow_active = 1
+ " let g:rainbow_active = 1
+ "    function! GitStatus()
+ "      let [a,m,r] = GitGutterGetHunkSummary()
+ "      return printf('+%d ~%d -%d', a, m, r)
+ "    endfunction
+" let g:airline_section_c='%f | %{GitStatus()}'
+  let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+  "" FZF
+  let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
 
- " "" FZF
- " let g:fzf_action = {
- "   \ 'ctrl-t': 'tab split',
- "   \ 'ctrl-x': 'split',
- "   \ 'ctrl-v': 'vsplit' }
+  " let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+  " let g:fzf_tags_command = 'ctags -R'
 
- " let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
- " let g:fzf_tags_command = 'ctags -R'
+  " let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+  let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
- " let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
- " let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
-
- "}}}
+ " }}}
 
  " ======================== Commands ============================= "{{{
 
@@ -203,9 +131,9 @@ command! -nargs=0 Format :call CocAction('format')
  " organize imports
  command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
- " " files in fzf
- " command! -bang -nargs=? -complete=dir Files
- "     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+ " files in fzf
+ command! -bang -nargs=? -complete=dir Files
+     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--inline-info']}), <bang>0)
 
  " advanced grep
  command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
@@ -241,126 +169,13 @@ command! -nargs=0 Format :call CocAction('format')
  "}}}
 
  " ======================== Custom Mappings ====================== "{{{
-
- "" the essentials
- let mapleader=" "
- nnoremap ; :
- nmap \ <leader>q
- nmap <leader>r :so ~/.vim/.vimrc<CR>
- nmap <leader>q :bd<CR>
- nmap <leader>w :w<CR>
- map <leader>s :Format<CR>
- nmap <Tab> :bnext<CR>
- nmap <S-Tab> :bprevious<CR>
- noremap <leader>e :PlugInstall<CR>
- noremap <C-q> :q<CR>
-
-" new line in normal mode and back
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
-
- " use a different register for delete and paste
- nnoremap d "_d
- vnoremap d "_d
- vnoremap p "_dP
- nnoremap x "_x
-
- " emulate windows copy, cut behavior
- vnoremap <LeftRelease> "+y<LeftRelease>
- vnoremap <C-c> "+y<CR>
- vnoremap <C-x> "+d<CR>
-
- " switch between splits using ctrl + {h,j,k,l}
- inoremap <C-h> <C-\><C-N><C-w>h
- inoremap <C-j> <C-\><C-N><C-w>j
- inoremap <C-k> <C-\><C-N><C-w>k
- inoremap <C-l> <C-\><C-N><C-w>l
- nnoremap <C-h> <C-w>h
- noremap <C-j> <C-w>j
- nnoremap <C-k> <C-w>k
- nnoremap <C-l> <C-w>l
-
- " disable hl with 2 esc
- noremap <silent><esc> <esc>:noh<CR><esc>
-
- " trim white spaces
- nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
-
- " markdown preview
- au FileType markdown nmap <leader>m :MarkdownPreview<CR>
-
- "" FZF
- nnoremap <silent> <leader>f :Files<CR>
- nmap <leader>b :Buffers<CR>
- nmap <leader>c :Commands<CR>
- nmap <leader>t :BTags<CR>
- nmap <leader>l :FloatermNew lazygit<CR>
- nmap <leader>/ :Rg<CR>
- nmap <leader>gc :Commits<CR>
- nmap <leader>gs :GFiles?<CR>
- nmap <leader>sh :History/<CR>
- nmap H 0
- nmap L $
- nmap U :redo<cr>
-
- " show mapping on all modes with F1
- nmap <F1> <plug>(fzf-maps-n)
- imap <F1> <plug>(fzf-maps-i)
- vmap <F1> <plug>(fzf-maps-x)
-
- "" coc
-
- " use tab to navigate snippet placeholders
- inoremap <silent><expr> <TAB>
-     \ coc#pum#visible() ? coc#_select_confirm() :
-     \ coc#expandableOrJumpable() ?
-     \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-     \ check_back_space() ? "\<TAB>" :
-     \ coc#refresh()
-
- let g:coc_snippet_next = '<tab>'
-
- " use enter to accept completion
- inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
- " multi cursor shortcuts
- nmap <silent> <C-a> <Plug>(coc-cursors-word)
- xmap <silent> <C-a> <Plug>(coc-cursors-range)
-
- " Use `[g` and `]g` to navigate diagnostics
- nmap <silent> [g <Plug>(coc-diagnostic-prev)
- nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
- " other stuff
- nmap <leader>rn <Plug>(coc-rename)
- nmap <leader>o :OR <CR>
-
- " jump stuff
- nmap <leader>jd <Plug>(coc-definition)
- nmap <leader>jy <Plug>(coc-type-definition)
- nmap <leader>ji <Plug>(coc-implementation)
- nmap <leader>jr <Plug>(coc-references)
-
- " other coc actions
- nnoremap <silent> K :call <SID>show_documentation()<CR>
- nmap <leader>a <Plug>(coc-codeaction-line)
- xmap <leader>a <Plug>(coc-codeaction-selected)
-
- " fugitive mappings
- nmap <leader>gd :Gdiffsplit<CR>
- nmap <leader>gb :Git blame<CR>
-
- " tmux navigator
- nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
- nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
- nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
- nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+ source ~/.vim/keymaps.vim
 
  "}}}
 
 
  " ======================== Additional sourcing ====================== "{{{
- source ~/.vim/statusline.vim
+ " source ~/.vim/statusline.vim
 
  "}}}
 
