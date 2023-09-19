@@ -109,4 +109,8 @@ map <S-Enter> O<ESC>
  nmap <leader>a <Plug>(coc-codeaction-line)
  xmap <leader>a <Plug>(coc-codeaction-selected)
 
+" fugitive mappings
+nmap <leader>gd :Gdiffsplit<CR>
+nmap <leader>gb :Git blame<CR>
+
  "}}}
