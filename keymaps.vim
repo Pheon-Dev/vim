@@ -14,6 +14,7 @@
  noremap <leader>pi :PlugInstall<CR>
  noremap <leader>pu :PlugUpdate<CR>
  noremap <leader>pg :PlugUpgrade<CR>
+ noremap <leader>pc :PlugClean<CR>
  noremap <C-q> :q<CR>
 
 " new line in normal mode and back
@@ -32,14 +33,26 @@ map <S-Enter> O<ESC>
  vnoremap <C-x> "+d<CR>
 
  " switch between splits using ctrl + {h,j,k,l}
- inoremap <C-h> <C-\><C-N><C-w>h
- inoremap <C-j> <C-\><C-N><C-w>j
- inoremap <C-k> <C-\><C-N><C-w>k
- inoremap <C-l> <C-\><C-N><C-w>l
+ " inoremap <C-h> <C-\><C-N><C-w>h
+ " inoremap <C-j> <C-\><C-N><C-w>j
+ " inoremap <C-k> <C-\><C-N><C-w>k
+ " inoremap <C-l> <C-\><C-N><C-w>l
  nnoremap <C-h> <C-w>h
  noremap <C-j> <C-w>j
  nnoremap <C-k> <C-w>k
  nnoremap <C-l> <C-w>l
+
+ inoremap <C-j> <C-o>o
+ inoremap <C-k> <C-o>O
+ inoremap <C-l> <C-o>A
+ inoremap <C-h> <C-o>I
+
+ nmap _ <Plug>MoveLineDown
+ nmap + <Plug>MoveLineUp
+ vmap H <Plug>MoveBlockLeft
+ vmap J <Plug>MoveBlockDown
+ vmap K <Plug>MoveBlockUp
+ vmap L <Plug>MoveBlockRight
 
  " disable hl with 2 esc
  noremap <silent><esc> <esc>:noh<CR><esc>
