@@ -29,6 +29,7 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
+Plug 'brenoprata10/nvim-highlight-colors'
 " Plug 'machakann/vim-sandwich'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 call plug#end()
