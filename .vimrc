@@ -20,7 +20,6 @@ source ~/.vim/options.vim
 "}}}
 
 " Themeing
-" let g:lightline = {'colorscheme': 'catppuccin_mocha'}
 colorscheme catppuccin_mocha
  " hi Pmenu guibg='#1e1e2e' guifg=white                    " popup menu colors
 " hi Comment gui=italic cterm=italic                      " italic comments
@@ -170,7 +169,7 @@ command! -nargs=0 Format :call CocAction('format')
 
  " ======================== Additional sourcing ====================== "{{{
  source ~/.vim/statusline.vim
- " source ~/.vim/config.vim
+ source ~/.vim/config.vim
 
  "}}}
 
