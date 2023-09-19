@@ -38,7 +38,6 @@ colorscheme catppuccin_mocha
 " " ======================== Plugin Configurations ======================== "{{{
 "
  "" built in plugins
- let loaded_netrwPlugin = 0                              " disable netrw
  let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
  let g:loaded_python_provider = 0
  let g:loaded_perl_provider = 1
@@ -83,13 +82,8 @@ colorscheme catppuccin_mocha
  " let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 
  " rainbow brackets
- " let g:rainbow_active = 1
- "    function! GitStatus()
- "      let [a,m,r] = GitGutterGetHunkSummary()
- "      return printf('+%d ~%d -%d', a, m, r)
- "    endfunction
-" let g:airline_section_c='%f | %{GitStatus()}'
-  let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+ let g:rainbow_active = 1
+
   "" FZF
   let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -175,7 +169,8 @@ command! -nargs=0 Format :call CocAction('format')
 
 
  " ======================== Additional sourcing ====================== "{{{
- " source ~/.vim/statusline.vim
+ source ~/.vim/statusline.vim
+ " source ~/.vim/config.vim
 
  "}}}
 
